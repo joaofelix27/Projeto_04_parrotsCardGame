@@ -15,9 +15,46 @@ body {
     margin-top: 40px;
 
 }
+.conteudogeral{
+    display: flex;
+    flex-wrap: wrap ;
+    align-items: center;
+    justify-content: center;
+    perspective: 800px;
+}
+.face,.verso{
+    width: 100px;
+    height: 100px;
+}
+.verso{
+    background-color:#A7E9AF;
+    position: absolute;
+    height: 146px;
+    width: 117px;
+    backface-visibility: hidden;
+}
 .front{
  width: 100px;
  height: 100px;
+}
+.carta{
+    height: 146px;
+    width: 117px;
+    border-radius: 5px;
+    border: 1px solid #99CEA8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 34px 34px;
+    position: relative;  
+    transform-style: preserve-3d;
+    transition:all 2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: rgba(0,0,0,0.2) 0px 5px 15px ;
+    
+
+}
+.girar{
+    transform:  rotateY(0deg);
 }
 .front:hover{
     cursor: pointer;
@@ -26,23 +63,15 @@ body {
     margin: 0 auto;
     width: 1400px;
 }
-.cartas{
-    display: flex;
-    flex-wrap: wrap ;
-    align-items: center;
-    justify-content: center;
-   
+.animação{
+    
+    transition: width 300ms  linear;   
 }
-
-.container_front{
-    height: 146px;
-    width: 117px;
-    border-radius: 5px;
-    border: 1px solid #99CEA8;
-    background-color:#A7E9AF;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 34px 34px;
-
+.animação:active{
+    cursor: pointer;
+    width: 200px;
+    background-color: blue;
+}
+.virar_carta{
+    transform:  rotateY(180deg);
 }
