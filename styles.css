@@ -25,6 +25,7 @@ body {
 .face,.verso{
     width: 100px;
     height: 100px;
+    pointer-events: none;
 }
 .verso{
     background-color:#A7E9AF;
@@ -74,4 +75,7 @@ body {
 }
 .virar_carta{
     transform:  rotateY(180deg);
+}
+.virada{
+    background-color: blue;
 }

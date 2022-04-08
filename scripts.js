@@ -14,25 +14,24 @@ let tudook ="ainda n"
     }
 }
 // OBJETO COM OS GIFS DA IMAGEM
+let cardData = [{imgSrc:"",name:""}]
 const getData = () => [
     {imgSrc: "/Imagens/bobrossparrot.gif", name: "bobrossparrot"} ,
     {imgSrc: "/Imagens/explodyparrot.gif", name: "explodyparrot"} ,
     {imgSrc: "/Imagens/fiestaparrot.gif", name: "fiestaparrot"} ,
-    {imgSrc: "/Imagens/metalparrot.gif", name: "metalparrot.gif"} ,
+    {imgSrc: "/Imagens/metalparrot.gif", name: "metalparrot"} ,
     {imgSrc: "/Imagens/revertitparrot.gif", name: "revertitparrot"} ,
     {imgSrc: "/Imagens/tripletsparrot.gif", name: "tripletsparrot"} ,
     {imgSrc: "/Imagens/unicornparrot.gif", name: "unicornparrot"} ,
 ];
 // FUNÇÃO QUE EMBARALHA AS CARTAS
  const randomize = () => {
-    let cartaData = [""]
      for (let i=0;i<(num_cartas/2);i++) {
-         cardData[i]= getData ()[i].imgSrc
+         cardData[i]=  getData () [i]
      }
     cardData = cardData.concat(cardData).sort();
     cardData.sort ( () => Math.random() - 0.5);
-    console.log (cardData)
-      return cardData;
+    return cardData;
  }
 // FUNÇÃO QUE GERA AS CARTAS
 gerarcartas()
@@ -40,6 +39,7 @@ gerarcartas()
 function gerarcartas () {
 let contador=0
 const cardData = randomize()
+console.log(cardData[1].name)
 while (contador<num_cartas) {
     const carta = document.createElement("div")
     const face = document.createElement("img")
@@ -47,7 +47,9 @@ while (contador<num_cartas) {
     carta.classList="carta"
     face.classList="face"
     verso.classList="verso"
-    face.src= cardData[contador]
+    face.src= cardData[contador].imgSrc
+    carta.setAttribute("nome", cardData[contador].name )
+    console.log(carta.name)
     verso.src= "/Imagens/front.png"
 
     // lista.innerHTML += `<div class="container_front" onclick="clicar(this)"> <img class="front" src="Imagens/front.png" <img class="front" src="Imagens/front.png" alt=""> </div>`
@@ -57,8 +59,26 @@ while (contador<num_cartas) {
     carta.appendChild(verso)
     carta.addEventListener('click', (e)=>{
         carta.classList.toggle("virar_carta");
+        checarcartas(e)
     })
 }
+}   
+const checarcartas = (e) =>{
+    const cartaclicada = e.target
+    cartaclicada.classList.add("virada")
+    let cartasclicadas= document.querySelectorAll(".virada")
+    console.log(cartasclicadas) 
+    if (cartasclicadas.length===2) {
+        if(cartasclicadas[0].getAttribute("nome")===cartasclicadas[1].getAttribute("nome")){
+            console.log("DEU BOM!!")
+             
+        } else {
+                console.log("wrong")
+                cartasclicadas[0].classList.remove("virar_carta")
+                cartasclicadas[1].classList.remove("virar_carta")
+                }
+    }
+
 }
 
 
