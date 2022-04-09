@@ -1,5 +1,5 @@
 // PERGUNTANDO AO USUÁRIO QUANTAS CARTAS VÃO SER
-const conteudogeral=document.querySelector(".conteudogeral")
+let conteudogeral=document.querySelector(".conteudogeral")
 let num_cartas = prompt ('Quantas cartas vão ser?')
 let tudook ="ainda n"
     while (tudook=="ainda n"){
@@ -26,6 +26,7 @@ const getData = () => [
 ];
 // FUNÇÃO QUE EMBARALHA AS CARTAS
  const randomize = () => {
+    cardData = [{imgSrc:"",name:""}]
      for (let i=0;i<(num_cartas/2);i++) {
          cardData[i]=  getData () [i]
      }
@@ -38,8 +39,8 @@ gerarcartas()
 // const lista = document.querySelector(".cartas")
 function gerarcartas () {
 let contador=0
-const cardData = randomize()
-console.log(cardData[1].name)
+alert (num_cartas)
+let cardData = randomize()
 while (contador<num_cartas) {
     const carta = document.createElement("div")
     const face = document.createElement("img")
@@ -63,22 +64,71 @@ while (contador<num_cartas) {
     })
 }
 }   
+let cartasclicadas
+let cartasviradas
+let jogadas=0
 const checarcartas = (e) =>{
+    jogadas++
+    cartasclicadas=[]
     const cartaclicada = e.target
     cartaclicada.classList.add("virada")
-    let cartasclicadas= document.querySelectorAll(".virada")
-    console.log(cartasclicadas) 
+    cartasviradas= document.querySelectorAll(".virar_carta")
+    cartasclicadas= document.querySelectorAll(".virada")
+    console.log(cartasclicadas.length) 
     if (cartasclicadas.length===2) {
         if(cartasclicadas[0].getAttribute("nome")===cartasclicadas[1].getAttribute("nome")){
             console.log("DEU BOM!!")
+            cartasclicadas[0].classList.remove("virada")
+            cartasclicadas[1].classList.remove("virada")
+            cartasclicadas=[]
              
         } else {
                 console.log("wrong")
-                cartasclicadas[0].classList.remove("virar_carta")
-                cartasclicadas[1].classList.remove("virar_carta")
+                setTimeout(virarcartas,1000)
                 }
+    }
+    if (cartasviradas.length==num_cartas){
+        alert(`Você ganhou o jogo em ${jogadas} jogadas`)
+        setTimeout(reiniciar,1000)
     }
 
 }
+ function virarcartas (){
+    cartasclicadas[0].classList.remove("virar_carta")
+    cartasclicadas[0].classList.remove("virada")
+    cartasclicadas[1].classList.remove("virar_carta")
+    cartasclicadas[1].classList.remove("virada")
+    cartasclicadas=[]
+    console.log(cartasclicadas.length) 
 
+ }
+ function reiniciar () {
+    for (i=0;i<cartasviradas.length;i++){
+        cartasviradas[i].classList.remove("virar_carta")
+    }
+    lopes=prompt("Deseja jogar novamente?")
 
+    if (lopes=="sim"){
+        jogadas=0
+        conteudogeral=document.querySelector(".conteudogeral")
+        conteudogeral.innerHTML=""
+        num_cartas = prompt ('Quantas cartas vão ser?')
+        tudook ="ainda n"
+        while (tudook=="ainda n"){
+                    if (isNaN(num_cartas) || num_cartas<4 || num_cartas >14 || (num_cartas%2)==1) {
+                        console.log(num_cartas)
+                        num_cartas = prompt ('Quantas cartas vão ser?')
+                        console.log(tudook)
+                        
+
+                    } else {
+                        tudook= "ok"
+                        console.log(tudook)
+                }
+        }
+    conteudogeral.innerHTML=""
+    jogadas=0
+    gerarcartas()
+    }
+    
+ }
