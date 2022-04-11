@@ -8,7 +8,6 @@ let num_cartas = prompt ('Quantas cartas vão ser? 4~14')
 let tudook ="ainda n"
     while (tudook=="ainda n"){
         if (isNaN(num_cartas) || num_cartas<4 || num_cartas >14 || (num_cartas%2)==1) {
-            console.log(num_cartas)
             num_cartas = prompt ('Quantas cartas vão ser? 4~14')
 
         } else {
@@ -74,7 +73,6 @@ const checarcartas = (e) =>{
     cartasclicadas= document.querySelectorAll(".virada")
     if (cartasclicadas.length===2) {
         if(cartasclicadas[0].getAttribute("nome")===cartasclicadas[1].getAttribute("nome")){
-            console.log("DEU BOM!!")
             cartasclicadas[0].classList.remove("virada")
             cartasclicadas[1].classList.remove("virada")
             cartasclicadas=[]
@@ -104,8 +102,9 @@ const checarcartas = (e) =>{
     for (i=0;i<cartasviradas.length;i++){
         cartasviradas[i].classList.remove("virar_carta")
     }
-    lopes=prompt("Deseja jogar novamente? sim/nao")
-
+    lopes=prompt("Deseja jogar novamente? sim/nao").toLowerCase()
+    console.log(lopes)
+    
     if (lopes=="sim"){
         conteudogeral=document.querySelector(".conteudogeral")
         conteudogeral.innerHTML=""
@@ -113,7 +112,6 @@ const checarcartas = (e) =>{
         tudook ="ainda n"
         while (tudook=="ainda n"){
                     if (isNaN(num_cartas) || num_cartas<4 || num_cartas >14 || (num_cartas%2)==1) {
-                        console.log(num_cartas)
                         num_cartas = prompt ('Quantas cartas vão ser? 4~14')
 
                     } else {
