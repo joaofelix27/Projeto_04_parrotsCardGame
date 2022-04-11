@@ -4,17 +4,15 @@ let aumenta_segundos =0
 let conteudo_titulo=document.querySelector(".container_titulo")
 let conteudo_cartas=document.querySelector(".container_cartas")
 let conteudogeral=document.querySelector(".conteudogeral")
-let num_cartas = prompt ('Quantas cartas vão ser?')
+let num_cartas = prompt ('Quantas cartas vão ser? 4~14')
 let tudook ="ainda n"
     while (tudook=="ainda n"){
         if (isNaN(num_cartas) || num_cartas<4 || num_cartas >14 || (num_cartas%2)==1) {
             console.log(num_cartas)
-            num_cartas = prompt ('Quantas cartas vão ser?')
-            console.log(tudook)
+            num_cartas = prompt ('Quantas cartas vão ser? 4~14')
 
         } else {
             tudook= "ok"
-            console.log(tudook)
     }
 }
 // OBJETO COM OS GIFS DA IMAGEM
@@ -40,10 +38,8 @@ const getData = () => [
  }
 // FUNÇÃO QUE GERA AS CARTAS
 gerarcartas()
-// const lista = document.querySelector(".cartas")
 function gerarcartas () {
 let contador=0
-alert (num_cartas)
 let cardData = randomize()
 while (contador<num_cartas) {
     const carta = document.createElement("div")
@@ -54,10 +50,7 @@ while (contador<num_cartas) {
     verso.classList="verso"
     face.src= cardData[contador].imgSrc
     carta.setAttribute("nome", cardData[contador].name )
-    console.log(carta.name)
     verso.src= "/Imagens/front.png"
-
-    // lista.innerHTML += `<div class="container_front" onclick="clicar(this)"> <img class="front" src="Imagens/front.png" <img class="front" src="Imagens/front.png" alt=""> </div>`
     contador += 1
     conteudogeral.appendChild(carta);
     carta.appendChild(face)
@@ -71,23 +64,20 @@ while (contador<num_cartas) {
 let cartasclicadas
 let cartasviradas
 let jogadas=0
+// FUNÇÃO QUE CHECA AS CARTAS
 const checarcartas = (e) =>{
     jogadas++
     cartasclicadas=[]
-    console.log (cartasclicadas)
-    console.log (jogadas)
     const cartaclicada = e.target
     cartaclicada.classList.add("virada")
     cartasviradas= document.querySelectorAll(".virar_carta")
     cartasclicadas= document.querySelectorAll(".virada")
-    console.log(cartasclicadas.length) 
     if (cartasclicadas.length===2) {
         if(cartasclicadas[0].getAttribute("nome")===cartasclicadas[1].getAttribute("nome")){
             console.log("DEU BOM!!")
             cartasclicadas[0].classList.remove("virada")
             cartasclicadas[1].classList.remove("virada")
             cartasclicadas=[]
-             
         } else {
                 setTimeout(virarcartas,1000)
                 }
@@ -97,17 +87,16 @@ const checarcartas = (e) =>{
         clearInterval(meuinterval)
         setTimeout(reiniciar,1000)
     }
-
 }
+// FUNÇÃO QUE VIRA AS CARTAS
  function virarcartas (){
     cartasclicadas[0].classList.remove("virar_carta")
     cartasclicadas[0].classList.remove("virada")
     cartasclicadas[1].classList.remove("virar_carta")
     cartasclicadas[1].classList.remove("virada")
     cartasclicadas=[]
-    console.log(cartasclicadas.length) 
-
  }
+ // FUNÇÃO QUE REINICIA O JOGO
  function reiniciar () {
      aumenta_segundos=0
      meuinterval=setInterval(tempo,1000)
@@ -115,23 +104,20 @@ const checarcartas = (e) =>{
     for (i=0;i<cartasviradas.length;i++){
         cartasviradas[i].classList.remove("virar_carta")
     }
-    lopes=prompt("Deseja jogar novamente?")
+    lopes=prompt("Deseja jogar novamente? sim/nao")
 
     if (lopes=="sim"){
         conteudogeral=document.querySelector(".conteudogeral")
         conteudogeral.innerHTML=""
-        num_cartas = prompt ('Quantas cartas vão ser?')
+        num_cartas = prompt ('Quantas cartas vão ser? 4~14')
         tudook ="ainda n"
         while (tudook=="ainda n"){
                     if (isNaN(num_cartas) || num_cartas<4 || num_cartas >14 || (num_cartas%2)==1) {
                         console.log(num_cartas)
-                        num_cartas = prompt ('Quantas cartas vão ser?')
-                        console.log(tudook)
-                        
+                        num_cartas = prompt ('Quantas cartas vão ser? 4~14')
 
                     } else {
                         tudook= "ok"
-                        console.log(tudook)
                 }
         }
     conteudogeral.innerHTML=""
@@ -141,10 +127,9 @@ const checarcartas = (e) =>{
         conteudo_titulo.innerHTML=""
         conteudo_cartas.innerHTML=""
     }
-    
  }
-
- function tempo () {
+ // FUNÇÃO QUE CONTA OS SEGUNDOS DE CADA JOGO
+function tempo () {
     aumenta_segundos+=1
     const caixa_tempo= document.querySelector(".tempo")
     caixa_tempo.innerHTML=aumenta_segundos

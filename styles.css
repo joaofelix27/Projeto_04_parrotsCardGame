@@ -94,7 +94,7 @@ body {
     transform:  rotateY(180deg);
 }
 .virada{
-    background-color: blue;
+    background-color:#A7E9AF;
 }
 @media (max-width:600px){
     .conteudogeral{
