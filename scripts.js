@@ -1,4 +1,8 @@
 // PERGUNTANDO AO USUÁRIO QUANTAS CARTAS VÃO SER
+let meuinterval=setInterval(tempo,1000)
+let aumenta_segundos =0
+let conteudo_titulo=document.querySelector(".container_titulo")
+let conteudo_cartas=document.querySelector(".container_cartas")
 let conteudogeral=document.querySelector(".conteudogeral")
 let num_cartas = prompt ('Quantas cartas vão ser?')
 let tudook ="ainda n"
@@ -70,6 +74,8 @@ let jogadas=0
 const checarcartas = (e) =>{
     jogadas++
     cartasclicadas=[]
+    console.log (cartasclicadas)
+    console.log (jogadas)
     const cartaclicada = e.target
     cartaclicada.classList.add("virada")
     cartasviradas= document.querySelectorAll(".virar_carta")
@@ -83,12 +89,12 @@ const checarcartas = (e) =>{
             cartasclicadas=[]
              
         } else {
-                console.log("wrong")
                 setTimeout(virarcartas,1000)
                 }
     }
     if (cartasviradas.length==num_cartas){
-        alert(`Você ganhou o jogo em ${jogadas} jogadas`)
+        alert(`Você ganhou o jogo em ${jogadas} jogadas e em ${aumenta_segundos} segundos!`)
+        clearInterval(meuinterval)
         setTimeout(reiniciar,1000)
     }
 
@@ -103,13 +109,15 @@ const checarcartas = (e) =>{
 
  }
  function reiniciar () {
+     aumenta_segundos=0
+     meuinterval=setInterval(tempo,1000)
+    jogadas=0
     for (i=0;i<cartasviradas.length;i++){
         cartasviradas[i].classList.remove("virar_carta")
     }
     lopes=prompt("Deseja jogar novamente?")
 
     if (lopes=="sim"){
-        jogadas=0
         conteudogeral=document.querySelector(".conteudogeral")
         conteudogeral.innerHTML=""
         num_cartas = prompt ('Quantas cartas vão ser?')
@@ -129,6 +137,16 @@ const checarcartas = (e) =>{
     conteudogeral.innerHTML=""
     jogadas=0
     gerarcartas()
+    } else {
+        conteudo_titulo.innerHTML=""
+        conteudo_cartas.innerHTML=""
     }
+    
+ }
+
+ function tempo () {
+    aumenta_segundos+=1
+    const caixa_tempo= document.querySelector(".tempo")
+    caixa_tempo.innerHTML=aumenta_segundos
     
  }
