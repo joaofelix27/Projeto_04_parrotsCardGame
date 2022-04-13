@@ -55,22 +55,28 @@ while (contador<num_cartas) {
     carta.appendChild(face)
     carta.appendChild(verso)
     carta.addEventListener('click', (e)=>{
-        carta.classList.toggle("virar_carta");
         checarcartas(e)
     })
 }
+// NÃO DEVIA DEIXAR CLICAR NA MESMA CARTA
 }   
 let cartasclicadas
 let cartasviradas
 let jogadas=0
 // FUNÇÃO QUE CHECA AS CARTAS
 const checarcartas = (e) =>{
-    jogadas++
     cartasclicadas=[]
     const cartaclicada = e.target
-    cartaclicada.classList.add("virada")
-    cartasviradas= document.querySelectorAll(".virar_carta")
     cartasclicadas= document.querySelectorAll(".virada")
+    if (cartaclicada.classList.contains("virada") || cartasclicadas.length===2){
+        return;
+    } else {
+        jogadas++
+        cartaclicada.classList.toggle("virar_carta");
+        cartaclicada.classList.add("virada")
+        cartasviradas= document.querySelectorAll(".virar_carta")
+        cartasclicadas= document.querySelectorAll(".virada")
+     
     if (cartasclicadas.length===2) {
         if(cartasclicadas[0].getAttribute("nome")===cartasclicadas[1].getAttribute("nome")){
             cartasclicadas[0].classList.remove("virada")
@@ -85,6 +91,7 @@ const checarcartas = (e) =>{
         clearInterval(meuinterval)
         setTimeout(reiniciar,1000)
     }
+}
 }
 // FUNÇÃO QUE VIRA AS CARTAS
  function virarcartas (){
